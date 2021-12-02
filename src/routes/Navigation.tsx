@@ -20,7 +20,7 @@ export const Navigation: FC = () => {
             <ul>
               {routes.map((route) => (
                 <li key={route.id} >
-                  <NavLink className={addActiveStyle} to={route.path}>{route.name}</NavLink>
+                  <NavLink className={addActiveStyle} to={route.to}>{route.name}</NavLink>
                 </li>
               ))}
             </ul>
@@ -31,7 +31,7 @@ export const Navigation: FC = () => {
               <Route key={id} path={path} element={<Component />} />
             ))}
 
-            <Route path="/*" element={<Navigate to={routes[0].path} replace />} />
+            <Route path="/*" element={<Navigate to={routes[0].to} replace />} />
 
           </Routes>
         </div>
