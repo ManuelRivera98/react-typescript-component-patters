@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# React + Typescript + React Router Dom V6
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a project of a base structure to test the new version of react router dom in its version 6.
 
 ## Available Scripts
 
