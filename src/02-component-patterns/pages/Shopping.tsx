@@ -1,12 +1,12 @@
 import { ProductButtons, ProductImg, ProductTitle, ProductCard } from "../components"
+import { products } from "../data/products";
+import { useShoppingCart } from "../hooks/useShoppingCart";
 import '../styles/custom-styles.css';
 
-const product = {
-  id: '1',
-  name: 'Coffee Mug',
-}
-
 export const Shopping = () => {
+
+  const { shoppingCart, onProductCountChange } = useShoppingCart();
+
   return (
     <div>
       <h1>Shopping Page</h1>
@@ -19,46 +19,44 @@ export const Shopping = () => {
           flexWrap: 'wrap',
         }}
       >
-        <ProductCard className="bg-dark" product={product} >
 
-          <ProductCard.Img className="custom-image" />
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            className="bg-dark" product={product}
+            onChange={onProductCountChange}
+            value={shoppingCart[product.id] ? shoppingCart[product.id].count : 0}
+          >
 
-          <ProductCard.Title className="text-white" />
+            <ProductImg className="custom-image" />
 
-          <ProductCard.Buttons className="custom-buttons" />
+            <ProductTitle className="text-white" />
 
-        </ProductCard>
+            <ProductButtons className="custom-buttons" />
 
+          </ProductCard>
+        ))}
 
-        <ProductCard className="bg-dark" product={product} >
+      </div>
 
-          <ProductImg className="custom-image" />
+      <div className="shopping-card">
+        {Object.entries(shoppingCart).map(([key, product]) => (
+          <ProductCard
+            key={key}
+            style={{
+              width: '100px',
+            }}
+            className="bg-dark" product={product}
+            onChange={onProductCountChange}
+            value={product.count}
+          >
 
-          <ProductTitle className="text-white" />
+            <ProductImg className="custom-image" />
 
-          <ProductButtons className="custom-buttons" />
+            <ProductButtons className="custom-buttons" style={{ display: 'flex', justifyContent: 'center' }} />
 
-        </ProductCard>
+          </ProductCard>))}
 
-        <ProductCard
-          style={{
-            backgroundColor: '#70D1F8'
-          }}
-          product={product} >
-
-          <ProductImg />
-
-          <ProductTitle style={{
-            fontWeight: 'bold',
-            color: 'white'
-          }} />
-
-          <ProductButtons style={{
-            display: 'flex',
-            justifyContent: 'center'
-          }} />
-
-        </ProductCard>
       </div>
     </div>
   )
