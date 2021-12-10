@@ -1,12 +1,13 @@
-import { CSSProperties, ReactElement } from "react";
+import { CSSProperties } from "react";
 
 export interface ProductCardProps {
   product: Product;
-  children?: ReactElement | ReactElement[];
+  children: (args: ProductCardHandlers) => JSX.Element;
   className?: string;
   style?: CSSProperties;
   onChange?: (args: onChangeArg) => void;
   value?: number;
+  initialValues?: InitialValues;
 };
 
 export interface Product {
@@ -19,6 +20,7 @@ export interface ProductContextProps {
   product: Product;
   counter: number;
   incrementBy: (value: number) => void;
+  maxCount?: number;
 };
 
 export interface ProductCardHOCProps {
@@ -54,8 +56,23 @@ export interface useProductProps {
   product: Product;
   onChange?: (args: onChangeArg) => void;
   value?: number;
+  initialValues?: InitialValues;
 };
 
 export interface ProductInCart extends Product {
   count: number;
 };
+export interface InitialValues {
+  count?: number;
+  maxCount?: number;
+};
+
+export interface ProductCardHandlers {
+  count: number;
+  isMaxCountReached: boolean;
+  maxCount?: number;
+  product: Product;
+
+  increaseBy: (value: number) => void;
+  reset: () => void;
+}

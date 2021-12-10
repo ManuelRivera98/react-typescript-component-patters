@@ -1,63 +1,58 @@
 import { ProductButtons, ProductImg, ProductTitle, ProductCard } from "../components"
 import { products } from "../data/products";
-import { useShoppingCart } from "../hooks/useShoppingCart";
 import '../styles/custom-styles.css';
 
-export const Shopping = () => {
+const product = products[0];
 
-  const { shoppingCart, onProductCountChange } = useShoppingCart();
+export const Shopping = () => {
 
   return (
     <div>
       <h1>Shopping Page</h1>
       <hr />
 
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
+      <ProductCard
+        key={product.id}
+        className="bg-dark"
+        product={product}
+        initialValues={{
+          count: 4,
+          maxCount: 10,
         }}
       >
 
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            className="bg-dark" product={product}
-            onChange={onProductCountChange}
-            value={shoppingCart[product.id] ? shoppingCart[product.id].count : 0}
-          >
-
+        {({
+          reset,
+          count,
+          isMaxCountReached,
+          maxCount,
+          increaseBy,
+        }) =>
+          <>
             <ProductImg className="custom-image" />
 
             <ProductTitle className="text-white" />
 
             <ProductButtons className="custom-buttons" />
 
-          </ProductCard>
-        ))}
+            <button onClick={reset}>Reset</button>
 
-      </div>
+            <button onClick={() => increaseBy(-2)}>-2</button>
 
-      <div className="shopping-card">
-        {Object.entries(shoppingCart).map(([key, product]) => (
-          <ProductCard
-            key={key}
-            style={{
-              width: '100px',
-            }}
-            className="bg-dark" product={product}
-            onChange={onProductCountChange}
-            value={product.count}
-          >
+            {!isMaxCountReached
+              && <button onClick={() => increaseBy(2)}>+2</button>}
 
-            <ProductImg className="custom-image" />
+            <span
+              style={{
+                marginLeft: '5px',
+                color: 'white',
+              }}
+            >{`${count} of ${maxCount}`}</span>
+          </>
+        }
 
-            <ProductButtons className="custom-buttons" style={{ display: 'flex', justifyContent: 'center' }} />
+      </ProductCard>
 
-          </ProductCard>))}
-
-      </div>
     </div>
   )
 }
