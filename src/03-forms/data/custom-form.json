@@ -1,0 +1,76 @@
+[
+  {
+    "id": "firstName",
+    "type": "text",
+    "name": "firstName",
+    "placeholder": "Name",
+    "label": "First Name",
+    "value": "",
+    "validations": [
+      {
+        "type": "required",
+        "message": "First Name is required"
+      },
+      {
+        "type": "minLength",
+        "message": "Minimum 5 characters",
+        "value": 5
+      }
+    ]
+  },
+  {
+    "id": "lastName",
+    "type": "text",
+    "name": "lastName",
+    "placeholder": "Last Name",
+    "label": "Last Name",
+    "value": "",
+    "validations": [
+      {
+        "type": "required",
+        "message": "Last Name is required"
+      }
+    ]
+  },
+  {
+    "id": "email",
+    "type": "email",
+    "name": "email",
+    "placeholder": "Email",
+    "label": "Email",
+    "value": "",
+    "validations": [
+      {
+        "type": "required",
+        "message": "email is required"
+      },
+      {
+        "type": "email",
+        "message": "Email no valid"
+      }
+    ]
+  },
+  {
+    "id": "movie",
+    "type": "select",
+    "name": "movie",
+    "label": "Movie",
+    "value": "",
+    "options": [
+      {
+        "id": 1,
+        "label": "Resident Evil"
+      },
+      {
+        "id": 2,
+        "label": "Super Man"
+      }
+    ],
+    "validations": [
+      {
+        "type": "required",
+        "message": "Movie is required"
+      }
+    ]
+  }
+]
